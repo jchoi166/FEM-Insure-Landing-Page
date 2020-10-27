@@ -1,0 +1,24 @@
+{
+  "name": "FEM-Insure-Landing-Page",
+  "version": "1.0.0",
+  "description": "![Design preview for the Job Listings coding challenge](./design/desktop-preview.jpg)",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "node-sass src/sass/main.scss src/css/style.css -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jchoi166/FEM-Insure-Landing-Page.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jchoi166/FEM-Insure-Landing-Page/issues"
+  },
+  "homepage": "https://github.com/jchoi166/FEM-Insure-Landing-Page#readme",
+  "dependencies": {
+    "node-sass": "^4.14.1"
+  },
+  "devDependencies": {}
+}
