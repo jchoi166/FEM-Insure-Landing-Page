@@ -1,0 +1,14 @@
+body {
+    background-color: red;
+}
+
+.test {
+    height: 300px;
+    background-color: blue;
+
+    @media (max-width: 500px){
+        background-color: green; 
+    }
+}
+
+//hello world
