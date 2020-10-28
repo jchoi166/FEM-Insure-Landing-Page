@@ -1,3 +1,3 @@
-const data = require("../../data.json")
+// const data = require("../../data.json")
 
-export const test = data[0]
+// export const test = data[0]
