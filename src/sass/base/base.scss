@@ -1,0 +1,23 @@
+*,
+*:before,
+*:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    height: 100%;
+
+}
+
+body {
+    // background-image: url("/images/loop-studios.svg");
+    box-sizing: border-box;
+    background-color: hsl(180, 52%, 96%)
+}
+
+.card-container {
+    margin-top: 5rem;
+}
