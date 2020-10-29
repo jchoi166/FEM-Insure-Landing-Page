@@ -2,17 +2,17 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
-// const globSync = require("glob").sync;
 
 module.exports = (env, options) => ({
   entry: ["./src/index.js"],
   devServer: {
     contentBase: "./dist"
   },
-//   devtool: "source-map",
+  
   node: {
     fs: 'empty'
   },
+
   module: {
     rules: [
       {
@@ -22,33 +22,19 @@ module.exports = (env, options) => ({
             ? "style-loader"
             : {
                 loader: MiniCssExtractPlugin.loader,
-                // options: {
-                //   publicPath: "../"
-                // }
               },
           "css-loader",
-          {
-            loader: 'postcss-loader', 
-            options: {
-              plugins: function () {
-                return [
-                  require('precss'),
-                  require('autoprefixer')
-                ];
-              }
-            }
-          },
           "sass-loader"
         ]
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(svg|jpg|gif|png)$/,
         use: [
           {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "img/"
+              outputPath: "img",
             }
           }
         ]
@@ -56,10 +42,7 @@ module.exports = (env, options) => ({
       {
         test: /\.(html)$/,
         use: {
-          loader: "html-srcsets-loader",
-          options: {
-            attrs: [":src", ':srcset']
-          }
+          loader: "html-loader",
         }
       },
       {
@@ -74,6 +57,7 @@ module.exports = (env, options) => ({
       }
     ]
   },
+
   plugins: [
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash].css"
@@ -81,20 +65,11 @@ module.exports = (env, options) => ({
     new HtmlWebpackPlugin({
         template: "src/index.html"
     }),
-    // new CleanWebpackPlugin()
-
     new CleanWebpackPlugin(["dist"]),
-    // ...globSync("src/**/*.html").map(fileName => {
-    //   return new HtmlWebpackPlugin({
-    //     template: fileName,
-    //     inject: "body",
-    //     filename: fileName.replace("src/", "")
-    //   });
-    // }),
   ],
+
   output: {
     filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: ""
   }
 });

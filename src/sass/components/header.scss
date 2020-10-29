@@ -1,0 +1,17 @@
+.header {
+    background-image: url("/src/images/bg-header-desktop.svg");
+    background-size: cover;
+    background-color: hsl(180, 29%, 50%);
+    height: 20rem; 
+    position: relative;
+
+    &__search-container {
+        position: absolute;
+        background-color: white;
+        width: 75%;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 50%)
+    }
+}
+

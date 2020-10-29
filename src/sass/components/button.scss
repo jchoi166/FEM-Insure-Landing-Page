@@ -1,0 +1,9 @@
+.button {
+    &--tag {
+        padding: 1rem;
+        font-weight: 700;
+        font-size: 1.3rem;
+        background-color: $color-cyan-filter-tablets;
+        color: $color-cyan-primary;
+    }
+}
