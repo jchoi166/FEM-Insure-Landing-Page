@@ -21,7 +21,8 @@ body {
 }
 
 .card-container {
-    margin-top: 5rem;
+    // margin-top: 5rem;
+    position: relative;
 
     @include respondPhone {
         width: 75%;
