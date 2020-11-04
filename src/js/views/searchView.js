@@ -9,6 +9,11 @@ const renderTag = tagName => {
     document.querySelector('.header__search-field').insertAdjacentHTML('beforeend', markup)
 }
 
-const addTag = (tag) => {
-    
+export const clearTagContainer = () => {
+    document.querySelector('.header__search-field').innerHTML = ''
 }
+
+export const populateTagContainer = (tagArr) => {
+    clearTagContainer()
+    tagArr.forEach(tag => renderTag(tag))
+}   
