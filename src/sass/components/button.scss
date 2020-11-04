@@ -1,9 +1,49 @@
 .button {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: $color-cyan-primary;
+
     &--tag {
-        padding: 1rem;
-        font-weight: 700;
-        font-size: 1.3rem;
         background-color: $color-cyan-filter-tablets;
         color: $color-cyan-primary;
+        margin: .4rem 1rem 1.2rem 0rem; 
+        padding: 1rem;
+    }
+    
+    &--filter {
+        background-color: $color-cyan-filter-tablets;
+        display: flex;
+        height: 3rem;
+        border-radius: 5px;
+        overflow: hidden;
+        margin: .7rem;
+        // align-items: center;
+        // padding: 1rem;
+
+        // display: inline-block;
+        // margin-right: 0rem;
+    }
+
+    &--clear {
+
+    }
+}
+
+.filter-text {
+    padding: 0rem .7rem;
+    line-height: 3rem;
+}
+
+.remove-icon {
+    background-color: $color-cyan-primary;
+    // height: 100%;
+    padding: .7rem .7rem .2rem .7rem;
+    // margin: .1rem;
+    // margin-left: -5px;
+    // padding: .5rem;
+
+    img {
+        // height: 1.5rem;
+        // padding: 1rem;
     }
 }

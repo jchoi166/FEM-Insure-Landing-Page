@@ -15,9 +15,17 @@ html {
 body {
     // background-image: url("/images/loop-studios.svg");
     box-sizing: border-box;
-    background-color: hsl(180, 52%, 96%)
+    background-color: hsl(180, 52%, 96%);
+    
+
 }
 
 .card-container {
-    margin-top: 5rem;
+    // margin-top: 5rem;
+    position: relative;
+
+    @include respondPhone {
+        width: 75%;
+        margin: auto;
+    }
 }

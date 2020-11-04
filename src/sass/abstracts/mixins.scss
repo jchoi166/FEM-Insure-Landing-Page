@@ -1,0 +1,3 @@
+@mixin respondPhone {
+    @media(min-width: 376px) {@content} 
+}
