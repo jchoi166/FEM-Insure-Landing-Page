@@ -1,12 +1,10 @@
-import { data } from "../../../data"
 
-
-const generateTags = (tagName)=> {
+const generateTags = (tagName, dataType)=> {
     // console.log(tagName)
     let spanArray = []
     for (let i of tagName) {
         console.log(i)
-        spanArray += `<span class="button button--tag" data-tag="${i}">${i}</span>`
+        spanArray += `<span class="button button--tag" data-${dataType}="${i}">${i}</span>`
     }
     return spanArray
 }
@@ -39,12 +37,12 @@ export const renderCard = card => {
         <hr class="card__separator">
       </div>
       <div class="card__tag-container">
-        <span class="button button--tag" data-tag="${card.role}">${card.role}</span>
-        <span class="button button--tag" data-tag="${card.level}">${card.level}</span>
+        <span class="button button--tag" data-role="${card.role}">${card.role}</span>
+        <span class="button button--tag" data-level="${card.level}">${card.level}</span>
 
-        ${card.tools.length > 0 ? generateTags(card.tools) : ''}
+        ${card.tools.length > 0 ? generateTags(card.tools, "tools") : ''}
         
-        ${card.languages.length > 0 ? generateTags(card.languages) : ''}
+        ${card.languages.length > 0 ? generateTags(card.languages, "languages") : ''}
 
       </div>
     </div>
@@ -53,6 +51,11 @@ export const renderCard = card => {
     document.querySelector('.card-container').insertAdjacentHTML('beforeend', markup)
 }
 
-export const populateCardContainer = () => {
+export const clearCardContainer = () => {
+  document.querySelector('.card-container').innerHTML = ''
+}
+
+export const populateCardContainer = (data) => {
+    clearCardContainer()
     data.forEach(card => renderCard(card))
 }

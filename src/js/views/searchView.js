@@ -1,7 +1,7 @@
 const renderTag = tagName => {
     let markup = 
     `
-    <div class="button button--filter">
+    <div class="button button--filter" data-name="${tagName}">
         <div class="filter-text">${tagName}</div>
         <div class="remove-icon"><img src="./images/icon-remove.svg" alt=""></div>
     </div>
@@ -9,6 +9,11 @@ const renderTag = tagName => {
     document.querySelector('.header__search-field').insertAdjacentHTML('beforeend', markup)
 }
 
-const addTag = (tag) => {
-    
+export const clearTagContainer = () => {
+    document.querySelector('.header__search-field').innerHTML = ''
 }
+
+export const populateTagContainer = (tagArr) => {
+    clearTagContainer()
+    tagArr.forEach(tag => renderTag(tag))
+}   
