@@ -12,18 +12,35 @@ let tagArray = []
 let cardArray = data
 let trackArray = []
 
-const updateCardArray = (cardArr, tag) => {
-    let trackArr = []
-    cardArr.forEach(elem => {
-        for (const key in elem) {
-            if (elem[key].includes(tag)) {
-                trackArr.push(elem)
-            }
+const createNewCardArray = (key, tagObj) => {
+
+    let tagValue = tagObj[key]
+    // console.log(tagValue)
+    cardArray.forEach(elem => {
+        if (elem[key] && elem[key].includes(tagValue)) {
+            trackArray.push(elem)
+        }
+        // console.log(elem[key])   
+    })
+    cardArray = trackArray
+    trackArray = []
+
+    // console.log("this is card array")
+    return cardArray
+}
+
+const updateCardArray = (tagArr) => {
+
+    let newCardArray = []
+
+    tagArr.forEach(tagObj => {
+        for (let key in tagObj) {
+            newCardArray = createNewCardArray(key, tagObj)
         }
     })
 
-    cardArr = trackArr
-    return cardArr
+    // console.log(newCardArray)
+    return newCardArray
 }
 
 document.querySelector(".card-section").addEventListener('click', e => {
@@ -35,17 +52,17 @@ document.querySelector(".card-section").addEventListener('click', e => {
 
         let dataKey = Object.keys(e.target.dataset)[0]
         let dataValue = Object.values(e.target.dataset)[0]
-
+        let tagObject = {[dataKey]:dataValue}
         //Checks to see if tag already exists in search field
-        if (!tagArray.includes(dataValue) ) {
+        if (!tagArray.includes(tagObject) ) {
 
             // Update tagArray and search field
-            tagArray.push(dataValue)
+            tagArray.push(tagObject)
             searchView.populateTagContainer(tagArray) 
     
             // Update cardArray and card-container
-            cardArray = updateCardArray(cardArray)
-            cardView.populateCardContainer(cardArray)
+            let newCardArray = updateCardArray(tagArray)
+            cardView.populateCardContainer(newCardArray)
 
             // cardArray.forEach(elem => {
             //     if (elem[dataKey] && elem[dataKey].includes(dataValue)) {
@@ -56,7 +73,7 @@ document.querySelector(".card-section").addEventListener('click', e => {
             // trackArray = []
     
             // cardView.populateCardContainer(cardArray)
-            console.log(tagArray)
+            // console.log(tagArray)
         } 
     }
 
@@ -80,10 +97,12 @@ document.querySelector(".card-section").addEventListener('click', e => {
         searchView.populateTagContainer(tagArray)
         console.log(tagArray)
         
+        // let newCardArray = updateCardArray(tagArray)
+        // cardView.populateCardContainer(newCardArray)
     }
 })
     // 3. Update card view
-
+    
     /** 
      * Create an array of filter tags
      * Once a tag gets picked, check card data for that tag lll

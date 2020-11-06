@@ -15,5 +15,12 @@ export const clearTagContainer = () => {
 
 export const populateTagContainer = (tagArr) => {
     clearTagContainer()
-    tagArr.forEach(tag => renderTag(tag))
+    tagArr.forEach(tag => {
+        for (let key in tag) {
+            // console.log(tag[key])
+            renderTag(tag[key])
+        }
+        // console.log(tag)
+    }
+    )
 }   
