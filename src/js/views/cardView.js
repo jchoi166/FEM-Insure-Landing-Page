@@ -3,7 +3,6 @@ const generateTags = (tagName, dataType)=> {
     // console.log(tagName)
     let spanArray = []
     for (let i of tagName) {
-        console.log(i)
         spanArray += `<span class="button button--tag" data-${dataType}="${i}">${i}</span>`
     }
     return spanArray

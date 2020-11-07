@@ -1,7 +1,7 @@
-const renderTag = tagName => {
+const renderTag = (tagName, tagKey) => {
     let markup = 
     `
-    <div class="button button--filter" data-name="${tagName}">
+    <div class="button button--filter" data-${tagKey}="${tagName}">
         <div class="filter-text">${tagName}</div>
         <div class="remove-icon"><img src="./images/icon-remove.svg" alt=""></div>
     </div>
@@ -15,5 +15,10 @@ export const clearTagContainer = () => {
 
 export const populateTagContainer = (tagArr) => {
     clearTagContainer()
-    tagArr.forEach(tag => renderTag(tag))
+    tagArr.forEach(tag => {
+        for (let key in tag) {
+            renderTag(tag[key], key)
+        }
+    }
+    )
 }   
