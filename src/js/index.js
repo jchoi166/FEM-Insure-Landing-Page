@@ -12,23 +12,7 @@ let tagArray = []
 let cardArray = data
 let trackArray = []
 
-const createNewCardArray = (key, tagObj) => {
-
-    let tagValue = tagObj[key]
-    // console.log(tagValue)
-    cardArray.forEach(elem => {
-        if (elem[key] && elem[key].includes(tagValue)) {
-            trackArray.push(elem)
-        }
-        // console.log(elem[key])   
-    })
-    cardArray = trackArray
-    trackArray = []
-
-    // console.log("this is card array")
-    return cardArray
-}
-
+// Runs create card array function for each tag in tag array
 const updateCardArray = (tagArr) => {
 
     let newCardArray = []
@@ -39,8 +23,22 @@ const updateCardArray = (tagArr) => {
         }
     })
 
-    // console.log(newCardArray)
     return newCardArray
+}
+
+// Adds every card with matching tag to card array
+const createNewCardArray = (key, tagObj) => {
+
+    let tagValue = tagObj[key]
+    cardArray.forEach(elem => {
+        if (elem[key] && elem[key].includes(tagValue)) {
+            trackArray.push(elem)
+        }
+    })
+    cardArray = trackArray
+    trackArray = []
+
+    return cardArray
 }
 
 document.querySelector(".card-section").addEventListener('click', e => {
@@ -53,7 +51,8 @@ document.querySelector(".card-section").addEventListener('click', e => {
         let dataKey = Object.keys(e.target.dataset)[0]
         let dataValue = Object.values(e.target.dataset)[0]
         let tagObject = {[dataKey]:dataValue}
-        //Checks to see if tag already exists in search field
+
+        // Checks to see if tag already exists in search field
         if (!tagArray.includes(tagObject) ) {
 
             // Update tagArray and search field
@@ -64,16 +63,6 @@ document.querySelector(".card-section").addEventListener('click', e => {
             let newCardArray = updateCardArray(tagArray)
             cardView.populateCardContainer(newCardArray)
 
-            // cardArray.forEach(elem => {
-            //     if (elem[dataKey] && elem[dataKey].includes(dataValue)) {
-            //         trackArray.push(elem)
-            //     }
-            // })
-            // cardArray = trackArray
-            // trackArray = []
-    
-            // cardView.populateCardContainer(cardArray)
-            // console.log(tagArray)
         } 
     }
 
@@ -82,32 +71,42 @@ document.querySelector(".card-section").addEventListener('click', e => {
     // Listen for remove icon click 
     else if (e.target && e.target.matches('.remove-icon, .remove-icon *')){
 
-        let el
+        let el 
+        let currentKey 
+        let currentValue
 
-        // Check to see if they hit actual remove icon, or icon container
+        // Check to see if they hit actual remove icon or icon container and select entire tag
         if (e.target.parentElement.matches('.remove-icon')) {    
             el = e.target.parentElement.parentElement
         } else {
             el = e.target.parentElement
         }
 
-        // Update tagArray and search-field
-        const tagNamePos = tagArray.indexOf(el.dataset.name)
-        if (tagNamePos > -1) { tagArray.splice(tagNamePos, 1) }
-        searchView.populateTagContainer(tagArray)
-        console.log(tagArray)
+        // Finding index of tag in tagArray
+        for (let key in el.dataset) {
+            currentKey = key
+            currentValue = el.dataset[key]
+        }
         
-        // let newCardArray = updateCardArray(tagArray)
-        // cardView.populateCardContainer(newCardArray)
-    }
-})
-    // 3. Update card view
-    
-    /** 
-     * Create an array of filter tags
-     * Once a tag gets picked, check card data for that tag lll
-     */
+        let index = tagArray.findIndex(x => x[currentKey] == currentValue)
+        
+        // Remove tag from array and update search field
+        if (index > -1) { tagArray.splice(index, 1) }
+        searchView.populateTagContainer(tagArray)
 
- 
+        // Update card view
+        if (tagArray.length >= 1) {
+            cardArray = data
+            let newCardArray = updateCardArray(tagArray)
+            cardView.populateCardContainer(newCardArray)
+        } else {
+            cardView.populateCardContainer(data)
+        }
+    }
 
 // controller to clear tags from search field
+
+    
+})
+  
+
