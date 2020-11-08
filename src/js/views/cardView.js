@@ -1,3 +1,4 @@
+const cardContainer = document.querySelector('.card-container')
 
 const generateTags = (tagName, dataType)=> {
     // console.log(tagName)
@@ -47,11 +48,11 @@ export const renderCard = card => {
     </div>
     
     `
-    document.querySelector('.card-container').insertAdjacentHTML('beforeend', markup)
+    cardContainer.insertAdjacentHTML('beforeend', markup)
 }
 
 export const clearCardContainer = () => {
-  document.querySelector('.card-container').innerHTML = ''
+  cardContainer.innerHTML = ''
 }
 
 export const populateCardContainer = (data) => {

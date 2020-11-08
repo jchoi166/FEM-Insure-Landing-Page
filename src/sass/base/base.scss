@@ -28,4 +28,33 @@ body {
         width: 75%;
         margin: auto;
     }
+
+    &__search-container {
+        position: relative;
+        background-color: white;
+        width: 75%;
+        left: 50%;
+        top: 0;
+        padding: 1.2rem 1.5rem;
+        transform: translate(-50%, -3.7rem);
+        box-shadow: 0px 10px 10px -5px $color-box-shadow;
+        border-radius: 5px;
+        display: flex;
+        margin-bottom: 3rem;
+        justify-content: space-between;
+        visibility: hidden;
+        
+        @include respondPhone {
+            padding: 1.5rem 3rem;
+            
+        }
+
+    }
+
+    &__search-field {
+        display: flex; 
+        flex-wrap: wrap;
+    }
 }
+
+
