@@ -6,11 +6,11 @@ const renderTag = (tagName, tagKey) => {
         <div class="remove-icon"><img src="./images/icon-remove.svg" alt=""></div>
     </div>
     `
-    document.querySelector('.header__search-field').insertAdjacentHTML('beforeend', markup)
+    document.querySelector('.card-section__search-field').insertAdjacentHTML('beforeend', markup)
 }
 
 export const clearTagContainer = () => {
-    document.querySelector('.header__search-field').innerHTML = ''
+    document.querySelector('.card-section__search-field').innerHTML = ''
 }
 
 export const populateTagContainer = (tagArr) => {
@@ -22,3 +22,5 @@ export const populateTagContainer = (tagArr) => {
     }
     )
 }   
+
+

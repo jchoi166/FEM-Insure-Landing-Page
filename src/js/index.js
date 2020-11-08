@@ -5,6 +5,9 @@ require.context("../images/", true, /\.(png|svg|jpg|gif)$/);
 import * as cardView from "./views/cardView"
 import * as searchView from "./views/searchView"
 
+const searchField = document.querySelector(".card-section__search-field")
+const searchContainer = document.querySelector(".card-section__search-container")
+
 // populates page with cards from data.json initially
 cardView.populateCardContainer(data)
 
@@ -15,21 +18,24 @@ let trackArray = []
 // Runs create card array function for each tag in tag array
 const updateCardArray = (tagArr) => {
 
-    let newCardArray = []
+    let tempCardArray = []
 
+    // Loop through tag array and run newCardArray function for each tag
     tagArr.forEach(tagObj => {
         for (let key in tagObj) {
-            newCardArray = createNewCardArray(key, tagObj)
+            tempCardArray = createNewCardArray(key, tagObj)
         }
     })
 
-    return newCardArray
+    return tempCardArray
 }
 
 // Adds every card with matching tag to card array
 const createNewCardArray = (key, tagObj) => {
 
     let tagValue = tagObj[key]
+
+    // function checks each card at key (key) parameter and checks to see if value matches value (tagVlue) parameter
     cardArray.forEach(elem => {
         if (elem[key] && elem[key].includes(tagValue)) {
             trackArray.push(elem)
@@ -41,9 +47,21 @@ const createNewCardArray = (key, tagObj) => {
     return cardArray
 }
 
+// Hides search field if there are no tags selected
+const checkSearchField = () => {
+
+    if (searchField.children.length == 0) {
+        searchContainer.style.visibility = "hidden"        
+        searchContainer.style.marginBottom = "3rem"
+    } else {
+        searchContainer.style.visibility = "visible"
+        searchContainer.style.marginBottom = "1.5rem"
+    }
+}
+
 document.querySelector(".card-section").addEventListener('click', e => {
 
-// controller to add tags to search field. 
+// controller to add tags to search field.
 
     // Listen for tag click 
     if (e.target && e.target.matches('.button--tag')) {
@@ -51,19 +69,23 @@ document.querySelector(".card-section").addEventListener('click', e => {
         let dataKey = Object.keys(e.target.dataset)[0]
         let dataValue = Object.values(e.target.dataset)[0]
         let tagObject = {[dataKey]:dataValue}
+        let newCardArray = []
 
         // Checks to see if tag already exists in search field
-        if (!tagArray.includes(tagObject) ) {
+        if (tagArray.some(obj => obj[dataKey] == dataValue)) {
+            console.log('its already here')
+            console.log(tagArray)
 
-            // Update tagArray and search field
+        } else {
+            console.log('not here')
             tagArray.push(tagObject)
             searchView.populateTagContainer(tagArray) 
-    
-            // Update cardArray and card-container
-            let newCardArray = updateCardArray(tagArray)
-            cardView.populateCardContainer(newCardArray)
 
-        } 
+            // Update cardArray and card-container
+            newCardArray = updateCardArray(tagArray)
+            console.log(newCardArray)
+            cardView.populateCardContainer(newCardArray)
+        }
     }
 
 // controller to remove tags from search field
@@ -92,6 +114,7 @@ document.querySelector(".card-section").addEventListener('click', e => {
         
         // Remove tag from array and update search field
         if (index > -1) { tagArray.splice(index, 1) }
+        console.log(tagArray)
         searchView.populateTagContainer(tagArray)
 
         // Update card view
@@ -100,13 +123,21 @@ document.querySelector(".card-section").addEventListener('click', e => {
             let newCardArray = updateCardArray(tagArray)
             cardView.populateCardContainer(newCardArray)
         } else {
+            cardArray = data
             cardView.populateCardContainer(data)
         }
     }
 
 // controller to clear tags from search field
+    else if (e.target && e.target.matches('.button--clear, .button--clear *')){
+        tagArray = []
+        cardArray = data
+        searchView.clearTagContainer()
+        cardView.populateCardContainer(data)
+    }
 
-    
+    checkSearchField()
 })
-  
+
+
 

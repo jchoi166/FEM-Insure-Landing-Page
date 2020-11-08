@@ -8,6 +8,8 @@
         color: $color-cyan-primary;
         margin: .4rem 1rem 1.2rem 0rem; 
         padding: 1rem;
+        cursor: pointer;
+        
     }
     
     &--filter {
@@ -17,15 +19,50 @@
         border-radius: 5px;
         overflow: hidden;
         margin: .7rem;
-        // align-items: center;
-        // padding: 1rem;
-
-        // display: inline-block;
-        // margin-right: 0rem;
+        
     }
 
     &--clear {
+        font-family: "Spartan";
+        font-weight: 700;
+        color: $color-cyan-dark-1; 
+        border: none; 
+        background: none;
+        position: relative;
+        cursor: pointer;
+        
+        span {
 
+            &:after {
+                content: "";
+                position: absolute;
+                // bottom: 0px;
+                width: 0px;
+                height: 1.5px;
+                margin-top: 16px;
+                transition: all .2s;
+                opacity: 0;
+                left: 0;
+                background-color: $color-cyan-primary;
+            }
+        }
+
+        &:hover {
+
+            span {
+                color: $color-cyan-primary;
+
+                &:after {
+                    width: 100%;
+                    opacity: 1;
+            
+                }
+            }
+        }
+
+        &:focus {
+            outline: none;
+        }
     }
 }
 
@@ -36,14 +73,10 @@
 
 .remove-icon {
     background-color: $color-cyan-primary;
-    // height: 100%;
+    cursor: pointer;
     padding: .7rem .7rem .2rem .7rem;
-    // margin: .1rem;
-    // margin-left: -5px;
-    // padding: .5rem;
 
-    img {
-        // height: 1.5rem;
-        // padding: 1rem;
+    &:hover {
+        background-color: $color-black;
     }
 }
