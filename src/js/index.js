@@ -1,6 +1,6 @@
 import "../sass/main.scss"
 import { data } from "../../data"
-require.context("../images/", true, /\.(png|svg|jpg|gif)$/);
+// require.context("../images/", true, /\.(png|svg|jpg|gif)$/);
 
 import * as cardView from "./views/cardView"
 import * as searchView from "./views/searchView"

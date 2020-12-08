@@ -16,7 +16,7 @@ export const renderCard = card => {
     const markup = `
     <div class="card">
       <div class="card__logo">
-        <img src=".${img}" alt="lol">
+        <img src="${img}" alt="lol">
       </div>
       <div class="card__profile">
         <div class="card__heading">
